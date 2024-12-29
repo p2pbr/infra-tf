@@ -16,5 +16,4 @@ variable "private_key_path" {
 variable "diretorio" {
   description = "O diretório a ser criado na máquina remota"
   type        = string
-  default     = "/home/${var.user}/novo_diretorio"
 }
