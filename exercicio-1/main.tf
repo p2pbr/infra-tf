@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     ssh = {
-      source  = "hashicorp/ssh"  # Provedor correto
-      version = ">= 2.0.0"        # Especificando a versão mínima
+      source  = "hashicorp/ssh"  # Corrigir o nome da fonte para "hashicorp/ssh"
+      version = ">= 2.0.0"       # Especificando uma versão mínima
     }
   }
 }
