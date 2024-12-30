@@ -1,25 +1,16 @@
-terraform {
-  required_providers {
-    tls = {
-      source  = "hashicorp/tls"
-      version = ">= 3.0.0"
+provider "null" {}
+
+resource "null_resource" "create_directory" {
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /home/jaime/meu_diretorio"  # Cria o diretório desejado no Ubuntu
+    ]
+    
+    connection {
+      type        = "ssh"
+      host        = "192.168.1.8"  # Endereço IP da máquina Ubuntu
+      user        = "jaime"        # Usuário no Ubuntu
+      private_key = file("C:/Users/p2p/.ssh/id_ed25519")  # Caminho da chave privada
     }
-    null = {
-      source  = "hashicorp/null"
-      version = ">= 3.0.0"
-    }
-  }
-}
-
-provider "tls" {}
-
-resource "tls_private_key" "example" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-resource "null_resource" "criar_diretorio" {
-  provisioner "local-exec" {
-    command = "ssh -i ${tls_private_key.example.private_key_pem} ${var.user}@${var.host} 'mkdir -p ${var.diretorio}'"
   }
 }
