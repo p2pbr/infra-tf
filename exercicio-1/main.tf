@@ -10,7 +10,13 @@ resource "null_resource" "create_directory" {
       type        = "ssh"
       host        = "192.168.1.8"  # Endereço IP da máquina Ubuntu
       user        = "jaime"        # Usuário no Ubuntu
-      private_key = file("C:/Users/p2p/.ssh/id_ed25519")  # Caminho da chave privada
+      private_key = chomp(base64decode(var.ssh_private_key))  # Utiliza a chave privada passada via variável
     }
   }
+}
+
+# Variável que irá receber a chave privada do GitHub Secrets
+variable "ssh_private_key" {
+  type        = string
+  description = "Chave privada SSH para conexão"
 }

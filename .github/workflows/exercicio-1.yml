@@ -1,0 +1,43 @@
+name: Terraform - Exercício 1
+
+on:
+  push:
+    branches:
+      - feature/exercicio-1  # A pipeline será acionada apenas para a branch `feature/exercicio-1`
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Configuração do Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0  # Ou a versão do Terraform que você estiver usando
+
+      # Navegar até o diretório do exercício (exercicio-1)
+      - name: Change to exercise directory
+        run: cd exercicio-1
+
+      # Configuração da chave SSH para conexão com o servidor Ubuntu
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519  # Garantir permissões corretas
+        # As permissões 600 são necessárias para que o SSH aceite a chave privada.
+
+      # Inicialização do Terraform
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./exercicio-1  # Especifica o diretório onde o main.tf está localizado
+
+      # Aplica o Terraform para criar o diretório
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: ./exercicio-1  # Especifica o diretório novamente
