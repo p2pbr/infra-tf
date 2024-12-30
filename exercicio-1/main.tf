@@ -3,7 +3,7 @@ provider "null" {}
 resource "null_resource" "create_directory" {
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p /home/jaime/meu_diretorio"  # Cria o diretório desejado no Ubuntu
+      "mkdir -p /home/jaime/meu_diretorio2"  # Cria o diretório desejado no Ubuntu
     ]
     
     connection {
