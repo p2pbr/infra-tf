@@ -20,3 +20,4 @@ variable "ssh_private_key" {
   type        = string
   description = "Chave privada SSH para conexão"
 }
+
