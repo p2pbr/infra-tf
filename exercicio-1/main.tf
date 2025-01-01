@@ -8,7 +8,7 @@ resource "null_resource" "create_directory" {
     
     connection {
       type        = "ssh"
-      host        = "192.168.1.8"  # Endereço IP da máquina Ubuntu
+      host        = "servidores-linux.70-71-bc-12-b3-87@cloud.shellhub.io"  # Endereço IP da máquina Ubuntu
       user        = "jaime"        # Usuário no Ubuntu
       private_key = chomp(base64decode(var.ssh_private_key))  # Utiliza a chave privada passada via variável
     }
