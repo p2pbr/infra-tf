@@ -20,10 +20,6 @@ jobs:
         with:
           terraform_version: 1.5.0  # Ou a versão do Terraform que você estiver usando
 
-      # Navegar até o diretório do exercício (exercicio-1)
-      - name: Change to exercise directory
-        run: cd exercicio-1
-
       # Configuração da chave SSH para conexão com o servidor Ubuntu
       - name: Set up SSH key
         run: |
@@ -35,9 +31,9 @@ jobs:
       # Inicialização do Terraform
       - name: Terraform Init
         run: terraform init
-        working-directory: ./exercicio-1  # Especifica o diretório onde o main.tf está localizado
+        working-directory: exercicio-1
 
-      # Aplica o Terraform para criar o diretório
+      # Aplicação do Terraform
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: ./exercicio-1  # Especifica o diretório novamente
+        working-directory: exercicio-1
